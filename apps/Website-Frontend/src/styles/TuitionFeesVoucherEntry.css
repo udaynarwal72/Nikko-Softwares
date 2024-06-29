@@ -1,0 +1,15 @@
+/* TuitionFeesVoucherEntry.css */
+
+.button {
+    border: 1px solid black;
+    padding: 9px;
+    margin: 0 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    z-index: 1;
+    background-color: lightgray; /* Example hover background color */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 1); /* Example shadow effect */
+}

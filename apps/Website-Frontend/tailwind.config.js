@@ -10,11 +10,13 @@ export default {
         navbarnotification:'#D9D9D9',
         profileusercolor:'#475569',
         sidebarcolor:'#E9F1FA',
+        verylightblue:'#38bdf8',
       },
       fontFamily:{
         navbarfont:['Port Lligat Sans'],
         everett:['Everett'],
         nunitosans:['Nunito Sans'],
+        merriweather:['Merriweather'],
       }
     },
   },
