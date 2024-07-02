@@ -8,6 +8,8 @@ import App from './App.jsx';
 import './index.css';
 import TutionFeesVoucherEntry from './pages/TutionFeesVoucherEntry.jsx';
 import Table from './component/Tables/CreditTable.jsx';
+import AddAccDetails from './pages/AddAccDetails.jsx';
+import CreateSection from './pages/CreateSection.jsx';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
   {
     path:'/table',
     element:<Table/>
+  },
+  {
+    path:'/addaccdetails',
+    element:<AddAccDetails/>
+  },
+  {
+    path: '/createsection',
+    element: <CreateSection />
   }
 ]);
 

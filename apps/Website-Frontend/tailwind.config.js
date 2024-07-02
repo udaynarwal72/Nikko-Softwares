@@ -11,12 +11,17 @@ export default {
         profileusercolor:'#475569',
         sidebarcolor:'#E9F1FA',
         verylightblue:'#38bdf8',
+        createsectiongray:'#EBEEF0BF',
       },
       fontFamily:{
         navbarfont:['Port Lligat Sans'],
         everett:['Everett'],
         nunitosans:['Nunito Sans'],
         merriweather:['Merriweather'],
+        inter:['Inter'],
+        inika:['Inika'],
+        poppins:['Poppins'],
+        poly:['Poly'],
       }
     },
   },
