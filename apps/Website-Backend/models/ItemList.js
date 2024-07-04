@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const User = require('./user.model'); // Import the User model
-const Master = require('./master.model'); // Import the Master model
+import { Schema as _Schema, model } from 'mongoose';
+const Schema = _Schema;
+import User from './user.model'; // Import the User model
+import Master from './master.model'; // Import the Master model
 
 const itemListSchema = new Schema({
   acc_no: { type: Number, required: true },
@@ -11,6 +11,6 @@ const itemListSchema = new Schema({
   masterId: { type: Schema.Types.ObjectId, ref: 'Master', required: true } // Reference to the Master schema
 });
 
-const ItemList = mongoose.model('ItemList', itemListSchema);
+const ItemList = model('ItemList', itemListSchema);
 
-module.exports = ItemList;
+export default ItemList;

@@ -1,4 +1,4 @@
-var jwt=require('jsonwebtoken')
+import { decode } from 'jsonwebtoken';
 const authsrt = "cloudnote";
 
 
@@ -10,7 +10,7 @@ const fetchuser=(req,res,next)=>{
         res.status(401).send({error:"please authenticatet"})
     }
 
-    const st =jwt.decode(token,authsrt)
+    const st =decode(token,authsrt)
     console.log(st)
     req.user=st.user;
     // console.log(st.user.id)
@@ -19,4 +19,4 @@ const fetchuser=(req,res,next)=>{
 }
 
 
-module.exports=fetchuser;
+export default defaultfetchuser;

@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const User = require('./User.js'); // Import the User model
+import { Schema as _Schema, model } from 'mongoose';
+const Schema = _Schema;
+import User from './User.js'; // Import the User model
 
 const masterSchema = new Schema({
   section: { type: String, required: true },
   userId: { type: Schema.Types.ObjectId, ref: 'User', required: true }, // Reference to the User schema
 });
 
-const Master = mongoose.model('Master', masterSchema);
+const Master = model('Master', masterSchema);
 
-module.exports = Master;
+export default Master;

@@ -1,11 +1,11 @@
-const express = require("express");
-const router = express.Router();
-const Notes = require("../models/Notes");
-const fetchuser = require("../middleware/fetchuser");
+import { Router } from "express";
+const router = Router();
+import Notes, { find, findById, findByIdAndUpdate, findByIdAndDelete } from "../models/Notes";
+import fetchuser from "../middleware/fetchuser";
 
 router.get("/getnotes", fetchuser, async (req, res) => {
   try {
-    let allnote = await Notes.find({ User: req.user.id });
+    let allnote = await find({ User: req.user.id });
 
     res.json(allnote);
   } catch (error) {
@@ -41,7 +41,7 @@ router.put("/update/:id", fetchuser, async (req, res) => {
     // title,description,image,user:req.user.id
     //   })
 
-    const note = await Notes.findById(req.params.id);
+    const note = await findById(req.params.id);
 
     if (!note) {
       return res.status(404).send("Note not found");
@@ -65,7 +65,7 @@ router.put("/update/:id", fetchuser, async (req, res) => {
       },
     };
 
-    const up = await Notes.findByIdAndUpdate(req.params.id, updateDoc, options);
+    const up = await findByIdAndUpdate(req.params.id, updateDoc, options);
 
     res.json(up);
   } catch (error) {
@@ -83,7 +83,7 @@ router.delete("/delete/:id", fetchuser, async (req, res) => {
     // title,description,image,user:req.user.id
     //   })
 
-    const note = await Notes.findById(req.params.id);
+    const note = await findById(req.params.id);
 
     if (!note) {
       return res.status(404).send("Note not found");
@@ -107,7 +107,7 @@ router.delete("/delete/:id", fetchuser, async (req, res) => {
     //   },
     // };
 
-    const up = await Notes.findByIdAndDelete(req.params.id);
+    const up = await findByIdAndDelete(req.params.id);
 
     res.json(up);
   } catch (error) {
@@ -115,4 +115,4 @@ router.delete("/delete/:id", fetchuser, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,16 +1,16 @@
-const express = require("express");
-const router = express.Router();
-const user = require("../models/User");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const fetchuser = require("../middleware/fetchuser");
+import { Router } from "express";
+const router = Router();
+import { findOne, create } from "../models/User";
+import { genSalt, hash, compare } from "bcrypt";
+import { sign } from "jsonwebtoken";
+import fetchuser from "../middleware/fetchuser";
 
 const authsrt = "cloudnote";
 
 //register a new user
 router.post("/reg", async (req, res) => {
 
-  const temp = await user.findOne({ id: req.body.id });
+  const temp = await findOne({ id: req.body.id });
 
   if (temp) {
     return res
@@ -18,10 +18,10 @@ router.post("/reg", async (req, res) => {
       .json({ error: "ID unavailable, please try with different id" });
   }
 
-  const salt = await bcrypt.genSalt(10);
-  const finalpass = await bcrypt.hash(req.body.password, salt);
+  const salt = await genSalt(10);
+  const finalpass = await hash(req.body.password, salt);
 
-  const usr = await user.create({
+  const usr = await create({
     collegeName: req.body.collegename,
     password: finalpass,
     id: req.body.id,
@@ -51,7 +51,7 @@ router.post("/", async (req, res) => {
   //     .json({ error: "ID unavailable, please try with different id" });
   // }
 
-  const userdata = await user.findOne({ id: req.body.id });
+  const userdata = await findOne({ id: req.body.id });
   // user= await user.find({userName:"Andressa"})
 
   if (!userdata) {
@@ -60,7 +60,7 @@ router.post("/", async (req, res) => {
       .json({ error: "Invalid Credentials, user doesnt exists" });
   }
 
-  const passwordcomp = await bcrypt.compare(
+  const passwordcomp = await compare(
     req.body.password,
     userdata.password
   );
@@ -74,14 +74,14 @@ router.post("/", async (req, res) => {
       id: userdata._id,
     },
   };
-  const authtoken = jwt.sign(data, authsrt);
+  const authtoken = sign(data, authsrt);
 
   res.json(authtoken);
 });
 
 router.post("/getuser", fetchuser, async (req, res) => {
   try {
-    let userid = await user.findOne({ id: req.body.id });
+    let userid = await findOne({ id: req.body.id });
     res.send(userid);
   } catch (error) {
     console.log(error.message);
@@ -89,4 +89,4 @@ router.post("/getuser", fetchuser, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

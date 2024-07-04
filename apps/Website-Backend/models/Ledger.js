@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const User = require('./user.model'); // Import the User model
-const Master = require('./master.model'); // Import the Master model
-const ItemList = require('./itemlist.model'); // Import the ItemList model
+import { Schema as _Schema, model } from 'mongoose';
+const Schema = _Schema;
+import User from './user.model'; // Import the User model
+import Master from './master.model'; // Import the Master model
+import ItemList from './itemlist.model'; // Import the ItemList model
 
 const ledgerSchema = new Schema({
   dateFrom: { type: Date, required: true },
@@ -26,6 +26,6 @@ const ledgerSchema = new Schema({
   masterId: { type: Schema.Types.ObjectId, ref: 'Master', required: true } // Reference to the Master schema
 });
 
-const Ledger = mongoose.model('Ledger', ledgerSchema);
+const Ledger = model('Ledger', ledgerSchema);
 
-module.exports = Ledger;
+export default Ledger;
