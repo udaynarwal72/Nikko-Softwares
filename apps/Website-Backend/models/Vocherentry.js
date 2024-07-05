@@ -1,8 +1,8 @@
-import { Schema as _Schema, model } from 'mongoose';
-const Schema = _Schema;
-import User from './user.model'; // Import the User model
-import Master from './master.model'; // Import the Master model
-import ItemList from './itemlist.model'; // Import the ItemList model
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const User = require('./user.model'); // Import the User model
+const Master = require('./master.model'); // Import the Master model
+const ItemList = require('./itemlist.model'); // Import the ItemList model
 
 const voucherEntrySchema = new Schema({
   openingBalance: { type: Number, required: true },
@@ -25,6 +25,6 @@ const voucherEntrySchema = new Schema({
   masterId: { type: Schema.Types.ObjectId, ref: 'Master', required: true } // Reference to the Master schema
 }, { timestamps: true });
 
-const VoucherEntry = model('VoucherEntry', voucherEntrySchema);
+const VoucherEntry = mongoose.model('VoucherEntry', voucherEntrySchema);
 
-export default VoucherEntry;
+module.exports = VoucherEntry;

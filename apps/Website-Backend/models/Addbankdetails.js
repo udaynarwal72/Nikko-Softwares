@@ -1,7 +1,7 @@
-import { Schema as _Schema, model } from 'mongoose';
-const Schema = _Schema;
-import User from './User.js'; // Import the User model
-import User from './User.js'; // Import the User model
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const User = require('./User.js'); // Import the User model
+
 
 
 const addBankDetailsSchema = new Schema({
@@ -13,6 +13,6 @@ const addBankDetailsSchema = new Schema({
   masterId: { type: Schema.Types.ObjectId, ref: 'Master', required: true } // Reference to the Master schema
 });
 
-const AddBankDetails = model('AddBankDetails', addBankDetailsSchema);
+const AddBankDetails = mongoose.model('AddBankDetails', addBankDetailsSchema);
 
-export default AddBankDetails;
+module.exports = AddBankDetails;
