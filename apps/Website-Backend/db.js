@@ -1,5 +1,6 @@
 import { connect } from 'mongoose';
-require('dotenv').config(); // Load environment variables from .env file
+import dotenv from 'dotenv';
+dotenv.config();
 const mongoURI= process.env.MONGO_URI;
 
 // 'mongodb://127.0.0.1:27017/CloudNote1?directConnection=true'
@@ -29,4 +30,4 @@ const connectmongo=async()=>{
 }
 
 
-export default defaultconnectmongo;
+export default connectmongo;

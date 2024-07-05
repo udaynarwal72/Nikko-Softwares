@@ -10,6 +10,7 @@ import TutionFeesVoucherEntry from './pages/TutionFeesVoucherEntry.jsx';
 import Table from './component/Tables/CreditTable.jsx';
 import AddAccDetails from './pages/AddAccDetails.jsx';
 import CreateSection from './pages/CreateSection.jsx';
+import EditableTable from './component/CustomXcelTable/CustomXcelTable.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,9 +32,12 @@ const router = createBrowserRouter([
   {
     path: '/createsection',
     element: <CreateSection />
+  },
+  {
+    path:'/editabletable',
+    element:<EditableTable/>
   }
 ]);
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />

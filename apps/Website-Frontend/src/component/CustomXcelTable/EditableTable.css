@@ -1,0 +1,18 @@
+/* EditableTable.css */
+.react-grid-Container {
+    height: 400px;
+  }
+  
+  button {
+    margin: 10px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
