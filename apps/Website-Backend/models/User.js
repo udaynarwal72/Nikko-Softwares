@@ -1,5 +1,5 @@
-import { Schema as _Schema, model } from 'mongoose';
-const Schema = _Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   id: { type: String, required: true, unique: true  },
@@ -7,6 +7,6 @@ const UserSchema = new Schema({
   collegeName: { type: String, required: true },
 });
 
-const User = model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
 
-export default User;
+module.exports = User;

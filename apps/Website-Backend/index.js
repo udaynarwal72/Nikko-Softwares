@@ -1,17 +1,22 @@
-import connectmongo from "./db.js";
-import express, { json } from "express";
-import dotenv from "dotenv";
-dotenv.config();
+const connectmongo = require("./db.js");
+const express = require("express");
 const app = express();
 const port = 3200;
-import cors from "cors";
+require('dotenv').config(); // Load environment variables from .env file
+const cors = require("cors");
 
 app.use(cors());
 
-app.use(json());
+app.use(express.json());
 connectmongo();
 
-app.use('/api/auth',require('./routes/auth').default)
+//index
+
+app.use('/api/auth',require('./routes/auth'))
+app.use('/api/section',require('./routes/section'))
+app.use('/api/master',require('./routes/master'))
+
+
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);

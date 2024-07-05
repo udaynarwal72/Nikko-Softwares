@@ -1,16 +1,16 @@
-import { Router } from "express";
-const router = Router();
-import { findOne, create } from "../models/User";
-import { genSalt, hash, compare } from "bcrypt";
-import { sign } from "jsonwebtoken";
-import fetchuser from "../middleware/fetchuser";
+const express = require("express");
+const router = express.Router();
+const user = require("../models/User");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const fetchuser = require("../middleware/fetchuser");
 
 const authsrt = "cloudnote";
 
 //register a new user
 router.post("/reg", async (req, res) => {
 
-  const temp = await findOne({ id: req.body.id });
+  const temp = await user.findOne({ id: req.body.id });
 
   if (temp) {
     return res
@@ -18,10 +18,10 @@ router.post("/reg", async (req, res) => {
       .json({ error: "ID unavailable, please try with different id" });
   }
 
-  const salt = await genSalt(10);
-  const finalpass = await hash(req.body.password, salt);
+  const salt = await bcrypt.genSalt(10);
+  const finalpass = await bcrypt.hash(req.body.password, salt);
 
-  const usr = await create({
+  const usr = await user.create({
     collegeName: req.body.collegename,
     password: finalpass,
     id: req.body.id,
@@ -29,29 +29,20 @@ router.post("/reg", async (req, res) => {
 
   usr.save();
 
-  // const data = {
-  //   user: {
-  //     id: user.id,
-  //   },
-  // };
-  // const authtoken = jwt.sign(data, authsrt);
 
   res.json(usr);
 });
+
+
 
 //login a user
 router.post("/", async (req, res) => {
   console.log(req.body);
 
-  // const temp = await user.findOne({ id: req.body.id });
 
-  // if (temp) {
-  //   return res
-  //     .status(400)
-  //     .json({ error: "ID unavailable, please try with different id" });
-  // }
+  
 
-  const userdata = await findOne({ id: req.body.id });
+  const userdata = await user.findOne({ id: req.body.id });
   // user= await user.find({userName:"Andressa"})
 
   if (!userdata) {
@@ -60,7 +51,7 @@ router.post("/", async (req, res) => {
       .json({ error: "Invalid Credentials, user doesnt exists" });
   }
 
-  const passwordcomp = await compare(
+  const passwordcomp = await bcrypt.compare(
     req.body.password,
     userdata.password
   );
@@ -69,19 +60,20 @@ router.post("/", async (req, res) => {
     return res.status(400).json({ error: "Invalid Credentials" });
   }
 
+
   const data = {
     user: {
-      id: userdata._id,
+      id: userdata.id,
     },
   };
-  const authtoken = sign(data, authsrt);
+  const authtoken = jwt.sign(data, authsrt);
 
   res.json(authtoken);
 });
 
 router.post("/getuser", fetchuser, async (req, res) => {
   try {
-    let userid = await findOne({ id: req.body.id });
+    let userid = await user.findOne({ id: req.body.id });
     res.send(userid);
   } catch (error) {
     console.log(error.message);
@@ -89,4 +81,4 @@ router.post("/getuser", fetchuser, async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;
