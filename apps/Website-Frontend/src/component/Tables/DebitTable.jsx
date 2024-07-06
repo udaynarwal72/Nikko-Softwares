@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Table = () => {
+const DebitTable = () => {
     const headers = ['Recipt No', 'A/C.NO', 'Type of Practical ACC', 'Group', 'Amount'];
     const data = [
         { 'Recipt No': '1', 'A/C.NO': 'John Doe', 'Type of Practical ACC': 'P.F', 'Group': 'Income', 'Amount': '25,000' },
@@ -18,7 +18,7 @@ const Table = () => {
     const columns = Object.keys(data[0]);
 
     return (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto font-inter">
             <table className="min-w-full bg-white border border-collapse border-black">
                 <thead className="bg-gray-300">
                     <tr>
@@ -53,4 +53,4 @@ const Table = () => {
     );
 }
 
-export default Table;
+export default DebitTable;

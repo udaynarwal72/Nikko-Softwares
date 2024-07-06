@@ -1,17 +1,17 @@
 import React from 'react';
 
-const CreditTable = () => {
-    const headers = ['Recipt No', 'A/C.NO', 'Type of Practical ACC', 'Group', 'Amount'];
+const CashBookTableRight = () => {
+    const headers = ['Date', 'Recipt No', 'A/C.NO', 'Type of Practical ACC', 'Group', 'Amount'];
     const data = [
-        { 'Recipt No': '1', 'A/C.NO': 'John Doe', 'Type of Practical ACC': 'P.F', 'Group': 'Income', 'Amount': '25,000' },
-        { 'Recipt No': '2', 'A/C.NO': 'Jane Doe', 'Type of Practical ACC': 'Staff Shalari', 'Group': 'expend', 'Amount': '45,000' },
-        { 'Recipt No': '3', 'A/C.NO': 'John Smith', 'Type of Practical ACC': 'D.D.C Nimbargi', 'Group': 'payable', 'Amount': '21,000' },
-        { 'Recipt No': '4', 'A/C.NO': 'John Doe', 'Type of Practical ACC': 'P.F', 'Group': 'Income', 'Amount': '25,000' },
-        { 'Recipt No': '5', 'A/C.NO': 'Jane Doe', 'Type of Practical ACC': 'Staff Shalari', 'Group': 'expend', 'Amount': '45,000' },
-        { 'Recipt No': '6', 'A/C.NO': 'John Smith', 'Type of Practical ACC': 'D.D.C Nimbargi', 'Group': 'payable', 'Amount': '21,000' },
-        { 'Recipt No': '7', 'A/C.NO': 'John Doe', 'Type of Practical ACC': 'P.F', 'Group': 'Income', 'Amount': '25,000' },
-        { 'Recipt No': '8', 'A/C.NO': 'Jane Doe', 'Type of Practical ACC': 'Staff Shalari', 'Group': 'expend', 'Amount': '45,000' },
-        { 'Recipt No': '8', 'A/C.NO': 'Jane Doe', 'Type of Practical ACC': 'Staff Shalari', 'Group': 'expend', 'Amount': '45,000' },
+        { 'Date': '05/07/2024', 'Recipt No': '1', 'A/C.NO': 'John Doe', 'Type of Practical ACC': 'P.F', 'Group': 'Income', 'Amount': '25,000' },
+        { 'Date': '05/07/2024', 'Recipt No': '2', 'A/C.NO': 'Jane Doe', 'Type of Practical ACC': 'Staff Shalari', 'Group': 'expend', 'Amount': '45,000' },
+        { 'Date': '05/07/2024', 'Recipt No': '3', 'A/C.NO': 'John Smith', 'Type of Practical ACC': 'D.D.C Nimbargi', 'Group': 'payable', 'Amount': '21,000' },
+        { 'Date': '05/07/2024', 'Recipt No': '4', 'A/C.NO': 'John Doe', 'Type of Practical ACC': 'P.F', 'Group': 'Income', 'Amount': '25,000' },
+        { 'Date': '05/07/2024', 'Recipt No': '5', 'A/C.NO': 'Jane Doe', 'Type of Practical ACC': 'Staff Shalari', 'Group': 'expend', 'Amount': '45,000' },
+        { 'Date': '05/07/2024', 'Recipt No': '6', 'A/C.NO': 'John Smith', 'Type of Practical ACC': 'D.D.C Nimbargi', 'Group': 'payable', 'Amount': '21,000' },
+        { 'Date': '05/07/2024', 'Recipt No': '7', 'A/C.NO': 'John Doe', 'Type of Practical ACC': 'P.F', 'Group': 'Income', 'Amount': '25,000' },
+        { 'Date': '05/07/2024', 'Recipt No': '8', 'A/C.NO': 'Jane Doe', 'Type of Practical ACC': 'Staff Shalari', 'Group': 'expend', 'Amount': '45,000' },
+        { 'Date': '05/07/2024', 'Recipt No': '8', 'A/C.NO': 'Jane Doe', 'Type of Practical ACC': 'Staff Shalari', 'Group': 'expend', 'Amount': '45,000' },
     ];
 
     // Extracting columns dynamically from the first data row
@@ -40,7 +40,7 @@ const CreditTable = () => {
                         <td className="py-2 px-3 border border-black font-semibold text-sm text-center">91,000</td>
                     </tr>
                     <tr className="bg-gray-200">
-                        <td colSpan={columns.length - 1} className="py-2 px-3 border border-black font-bold text-sm text-center">CLOSING BALANCE</td>
+                        <td colSpan={columns.length - 1} className="py-2 px-3 border border-black font-bold text-sm text-center">CLOSING CASH BALANCE</td>
                         <td className="py-2 px-3 border border-black font-semibold text-sm text-center">91,000</td>
                     </tr>
                     <tr className="bg-gray-200">
@@ -53,4 +53,4 @@ const CreditTable = () => {
     );
 }
 
-export default CreditTable;
+export default CashBookTableRight;
