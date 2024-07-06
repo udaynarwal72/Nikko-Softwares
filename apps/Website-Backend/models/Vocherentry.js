@@ -8,6 +8,7 @@ const voucherEntrySchema = new Schema({
   openingBalance: { type: Number, required: true },
   entryDate: { type: Date, required: true },
   creditTable: [{
+    openingBalance: { type: Number, required: true },
     reciptNumber: { type: Number, required: true },
     AccNumber: { type: Number, required: true, ref: 'ItemList' }, // Reference to the ItemList schema
     typeOfAcc: { type: String, required: true, ref: 'ItemList' }, // Reference to the ItemList schema
@@ -19,7 +20,8 @@ const voucherEntrySchema = new Schema({
     AccNumber: { type: Number, required: true, ref: 'ItemList' }, // Reference to the ItemList schema
     type: { type: String, required: true, ref: 'ItemList' }, // Reference to the ItemList schema
     group: { type: String, required: true, ref: 'ItemList' }, // Reference to the ItemList schema
-    amount: { type: Number, required: true }
+    amount: { type: Number, required: true },
+    closingBalance: { type: Number, required: true }
   }],
   userId: { type: Schema.Types.ObjectId, ref: 'User', required: true }, // Reference to the User schema
   masterId: { type: Schema.Types.ObjectId, ref: 'Master', required: true } // Reference to the Master schema
