@@ -10,9 +10,10 @@ const cashbookSchema = new Schema({
   creditTable: [{
     openingBalance: { type: Number, required: true },
     creditDate: { type: Date, required: true },
-    reciptNumber: { type: Number, required: true },
+    reciptNumber: { type: Number},
     AccNumber: { type: Number, required: true, ref: 'ItemList' }, // Reference to the ItemList schema
     typeOfAcc: { type: String, required: true, ref: 'ItemList' }, // Reference to the ItemList schema
+    narration: { type: String, required: true },
     group: { type: String, required: true, ref: 'ItemList' }, // Reference to the ItemList schema
     amount: { type: Number, required: true }
   }],
@@ -23,6 +24,7 @@ const cashbookSchema = new Schema({
     type: { type: String, required: true, ref: 'ItemList' }, // Reference to the ItemList schema
     group: { type: String, required: true, ref: 'ItemList' }, // Reference to the ItemList schema
     amount: { type: Number, required: true },
+    narration: { type: String, required: true },
     closingBalance: { type: Number, required: true }
   }],
   userId: { type: Schema.Types.ObjectId, ref: 'User', required: true }, // Reference to the User schema

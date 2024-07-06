@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const User = require('./User.js'); // Import the User model
-
 
 
 const openingBalanceschema = new Schema({
@@ -10,6 +8,6 @@ const openingBalanceschema = new Schema({
     masterId: { type: Schema.Types.ObjectId, ref: 'Master', required: true } // Reference to the Master schema
 });
 
-const openingBalance = mongoose.model('AddBankDetails', openingBalanceschema);
+const openingBalance = mongoose.model('OpeningBalance', openingBalanceschema);
 
 module.exports = openingBalance;
