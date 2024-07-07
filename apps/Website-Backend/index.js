@@ -15,7 +15,8 @@ connectmongo();
 app.use('/api/auth',require('./routes/auth'))
 app.use('/api/section',require('./routes/section'))
 app.use('/api/master',require('./routes/master'))
-
+app.use('/api/vocher',require('./routes/vocherentry'))
+app.use('/api/itemlist',require('./routes/itemlist'))
 
 
 app.listen(port, () => {
