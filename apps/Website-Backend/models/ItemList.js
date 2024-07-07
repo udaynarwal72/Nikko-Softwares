@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const User = require('./user.model'); // Import the User model
-const Master = require('./master.model'); // Import the Master model
+
 
 const itemListSchema = new Schema({
   acc_no: { type: Number, required: true },

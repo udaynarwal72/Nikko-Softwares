@@ -2,13 +2,22 @@ const express = require("express");
 const router = express.Router();
 const fetchuser = require("../middleware/fetchuser"); //fetchusermiddle
 const AddBankDetails = require('../models/Addbankdetails');
-
+const Master=require('../models/Mastersection')
 
 
 
 router.post('/addBankDetails', fetchuser, async (req, res) => {
     try {
-      const { bank_name, account_number, account_balance, cash, masterId } = req.body;
+      const { bank_name, account_number, account_balance, cash, section } = req.body;
+
+
+      // to get master id form given section and use it as foreign key
+      const master = await Master.findOne({ section, userId: req.user.id });
+
+      if (!master) {
+        return res.status(404).json({ message: 'Master section not found' });
+      }
+      
       
       // Creating a new bank details object
       const bankDetails = new AddBankDetails({
@@ -17,7 +26,7 @@ router.post('/addBankDetails', fetchuser, async (req, res) => {
         account_balance,
         cash,
         userId: req.user.id,  // Assuming fetchuser middleware sets req.user
-        masterId
+        masterId:master.id
       });
   
       // Saving the bank details to the database

@@ -1,5 +1,5 @@
 var jwt=require('jsonwebtoken')
-const authsrt = "cloudnote";
+const authsrt = "nikko";
 
 
 const fetchuser=(req,res,next)=>{

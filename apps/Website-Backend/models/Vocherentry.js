@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const User = require('./user.model'); // Import the User model
-const Master = require('./master.model'); // Import the Master model
-const ItemList = require('./itemlist.model'); // Import the ItemList model
+
 
 const voucherEntrySchema = new Schema({
-  openingBalance: { type: Number, required: true },
+  openingBalance: { type: Number, required: true,ref:'OpeningBalance' },
   entryDate: { type: Date, required: true },
   creditTable: [{
     openingBalance: { type: Number, required: true },

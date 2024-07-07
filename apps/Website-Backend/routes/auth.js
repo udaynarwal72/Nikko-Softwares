@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const fetchuser = require("../middleware/fetchuser");
 
-const authsrt = "cloudnote";
+const authsrt = "nikko";
 
 //register a new user
 router.post("/reg", async (req, res) => {
@@ -65,6 +65,9 @@ router.post("/", async (req, res) => {
     user: {
       id: userdata.id,
     },
+
+
+
   };
   const authtoken = jwt.sign(data, authsrt);
 
