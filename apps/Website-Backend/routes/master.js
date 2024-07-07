@@ -5,10 +5,6 @@ const fetchuser = require("../middleware/fetchuser"); //fetchusermiddle
 const Master=require("../models/Mastersection");
 
 
-
-
-
-
 router.post('/addMaster', fetchuser, async (req, res) => {
     try {
       const { section } = req.body;

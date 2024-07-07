@@ -5,7 +5,6 @@ const AddBankDetails = require('../models/Addbankdetails');
 const Master=require('../models/Mastersection')
 
 
-
 router.post('/addBankDetails', fetchuser, async (req, res) => {
     try {
       const { bank_name, account_number, account_balance, cash, section } = req.body;
@@ -51,6 +50,66 @@ router.post('/addBankDetails', fetchuser, async (req, res) => {
     }
   });
   
+
+  //route to update bankdetails
+  router.put('/updateBankDetails/:id', fetchuser, async (req, res) => {
+    try {
+        const { bank_name, account_number, account_balance, cash, section } = req.body;
+
+        // Find the bank details by ID and ensure the user owns it
+        let bankDetails = await AddBankDetails.findById(req.params.id);
+        if (!bankDetails || bankDetails.userId.toString() !== req.user.id) {
+            return res.status(404).json({ message: 'Bank details not found' });
+        }
+
+        // Update the master section if provided
+        let master = bankDetails.masterId;
+        if (section) {
+            master = await Master.findOne({ section, userId: req.user.id });
+            if (!master) {
+                return res.status(404).json({ message: 'Master section not found' });
+            }
+        }
+
+        // Update the bank details
+        bankDetails = await AddBankDetails.findByIdAndUpdate(
+            req.params.id,
+            {
+                bank_name,
+                account_number,
+                account_balance,
+                cash,
+                masterId: master.id
+            },
+            { new: true }
+        );
+
+        res.status(200).json(bankDetails);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+
+    
+// Route to delete bank details
+router.delete('/deleteBankDetails/:id', fetchuser, async (req, res) => {
+    try {
+        // Find the bank details by ID and ensure the user owns it
+        const bankDetails = await AddBankDetails.findById(req.params.id);
+        if (!bankDetails || bankDetails.userId.toString() !== req.user.id) {
+            return res.status(404).json({ message: 'Bank details not found' });
+        }
+
+        // Delete the bank details
+        await AddBankDetails.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: 'Bank details deleted successfully' });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+});
 
 
 

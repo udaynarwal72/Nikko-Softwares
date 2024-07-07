@@ -49,7 +49,7 @@ router.get('/getopeningbalances', fetchUser, async (req, res) => {
   //route to set cerdit table entries
   router.post('/setcreditentry', fetchUser, async (req, res) => {
     try {
-      const { entryDate, creditTable, masterId } = req.body;
+      const { entryDate, creditTable, masterId, reciptNumber } = req.body;
   
       const newVoucherEntry = new VoucherEntry({
         entryDate,

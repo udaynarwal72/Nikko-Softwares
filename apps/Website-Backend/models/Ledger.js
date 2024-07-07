@@ -7,7 +7,7 @@ const ItemList = require('./itemlist.model'); // Import the ItemList model
 const ledgerSchema = new Schema({
   dateFrom: { type: Date, required: true },
   dateTo: { type: Date, required: true },
-  ledgerHeading: { type: String, required: true, ref: 'ItemList' }, // Reference to the ItemList schema
+  ledgerHeading: { type: Schema.Types.ObjectId, required: true, ref: 'ItemList' }, // Reference to the ItemList schema
   creditTable: [{
     creditDate: { type: Date, required: true },
     reciptNumber: { type: Number, required: true },
