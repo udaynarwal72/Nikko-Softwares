@@ -4,9 +4,12 @@ const user = require("../models/User");
 const fetchuser = require("../middleware/fetchuser"); //fetchusermiddle
 const Master = require("../models/Mastersection");
 
+// http://localhost:3200/api/section/routes/master/addmaster
 
-router.post('/addMaster', fetchuser, async (req, res) => {
+router.post('/addmaster', fetchuser, async (req, res) => {
   try {
+    console.log('hi')
+    console.log(req.body)
     const { section } = req.body;
 
     // Creating a new master object

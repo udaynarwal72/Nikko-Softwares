@@ -38,10 +38,6 @@ router.post("/reg", async (req, res) => {
 //login a user
 router.post("/", async (req, res) => {
   console.log(req.body);
-
-
-  
-
   const userdata = await user.findOne({ id: req.body.id });
   // user= await user.find({userName:"Andressa"})
 
@@ -63,7 +59,7 @@ router.post("/", async (req, res) => {
 
   const data = {
     user: {
-      id: userdata.id,
+      id: userdata._id,
     },
 
 

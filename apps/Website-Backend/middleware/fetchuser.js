@@ -13,10 +13,9 @@ const fetchuser=(req,res,next)=>{
     const st =jwt.decode(token,authsrt)
     console.log(st)
     req.user=st.user;
-    console.log(st.user.id)
+    console.log("user id", st.user)
     next();
 
 }
-
 
 module.exports=fetchuser;

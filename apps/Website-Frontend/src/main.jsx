@@ -13,6 +13,7 @@ import CreateSection from './pages/CreateSection.jsx';
 import EditableTable from './component/CustomXcelTable/CustomXcelTable.jsx';
 import SectionTable from './pages/SectionTable.jsx';
 import CashBook from './pages/CashBook.jsx';
+import LoginPage from './pages/Signin.jsx';
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: '/cashbook',
     element: <CashBook />
+  },
+  {
+    path:'/signin',
+    element:<LoginPage/>
   }
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
