@@ -37,38 +37,39 @@ router.post("/reg", async (req, res) => {
 
 //login a user
 router.post("/", async (req, res) => {
-  console.log(req.body);
-  const userdata = await user.findOne({ id: req.body.id });
-  // user= await user.find({userName:"Andressa"})
+  try {
+    console.log(req.body);
+    const userdata = await user.findOne({ id: req.body.id });
 
-  if (!userdata) {
-    return res
-      .status(400)
-      .json({ error: "Invalid Credentials, user doesnt exists" });
+    if (!userdata) {
+      return res
+        .status(400)
+        .json({ error: "Invalid Credentials, user doesn't exist" });
+    }
+
+    const passwordcomp = await bcrypt.compare(req.body.password, userdata.password);
+
+    if (!passwordcomp) {
+      return res.status(400).json({ error: "Invalid Credentials" });
+    }
+
+    const data = {
+      user: {
+        id: userdata._id,
+      },
+    };
+
+    const authtoken = jwt.sign(data, authsrt);
+    res.json(authtoken);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "An error occurred" });
   }
-
-  const passwordcomp = await bcrypt.compare(
-    req.body.password,
-    userdata.password
-  );
-
-  if (!passwordcomp) {
-    return res.status(400).json({ error: "Invalid Credentials" });
-  }
-
-
-  const data = {
-    user: {
-      id: userdata._id,
-    },
-
-
-
-  };
-  const authtoken = jwt.sign(data, authsrt);
-
-  res.json(authtoken);
 });
+
+
+
 
 router.post("/getuser", fetchuser, async (req, res) => {
   try {
