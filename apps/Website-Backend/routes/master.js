@@ -8,8 +8,7 @@ const Master = require("../models/Mastersection");
 
 router.post('/addmaster', fetchuser, async (req, res) => {
   try {
-    console.log('hi')
-    console.log(req.body)
+   
     const { section } = req.body;
 
     // Creating a new master object
