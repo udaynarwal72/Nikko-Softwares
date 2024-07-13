@@ -4,7 +4,7 @@ const fetchuser = require("../middleware/fetchuser"); //fetchusermiddle
 const AddBankDetails = require('../models/Addbankdetails');
 const Master = require('../models/Mastersection')
 
-
+// Route to add  bank details for the authenticated user
 router.post('/addBankDetails', fetchuser, async (req, res) => {
   try {
     const { bank_name, account_number, account_balance, cash, section } = req.body;
