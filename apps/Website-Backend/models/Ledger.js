@@ -1,13 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const User = require('./user.model'); // Import the User model
-const Master = require('./master.model'); // Import the Master model
-const ItemList = require('./itemlist.model'); // Import the ItemList model
 
 const ledgerSchema = new Schema({
   dateFrom: { type: Date, required: true },
   dateTo: { type: Date, required: true },
-  ledgerHeading: { type: Schema.Types.ObjectId, required: true, ref: 'ItemList' }, // Reference to the ItemList schema
+  ledgerHeading:{type: String, required: true},
+  Itemlist:{ type: Schema.Types.ObjectId, required: true, ref: 'ItemList' }, // Reference to the ItemList schema
   creditTable: [{
     creditDate: { type: Date, required: true },
     reciptNumber: { type: Number, required: true },

@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const User = require('./user.model'); // Import the User model
-const Master = require('./master.model'); // Import the Master model
-const ItemList = require('./itemlist.model'); // Import the ItemList model
 
 const cashbookSchema = new Schema({
   dateFrom: { type: Date, required: true },
