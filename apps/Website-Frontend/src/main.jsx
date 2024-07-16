@@ -11,9 +11,9 @@ import Table from './component/Tables/CreditTable.jsx';
 import AddAccDetails from './pages/AddAccDetails.jsx';
 import CreateSection from './pages/CreateSection.jsx';
 import EditableTable from './component/CustomXcelTable/CustomXcelTable.jsx';
-import SectionTable from './pages/SectionTable.jsx';
 import CashBook from './pages/CashBook.jsx';
 import LoginPage from './pages/Signin.jsx';
+import ItemTable from './pages/ItemTable.jsx';
 
 const router = createBrowserRouter([
   {
@@ -41,8 +41,8 @@ const router = createBrowserRouter([
     element: <EditableTable />
   },
   {
-    path: '/sectiontable',
-    element: <SectionTable />
+    path: '/itemlist',
+    element:<ItemTable/>
   },
   {
     path: '/cashbook',

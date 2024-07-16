@@ -1,0 +1,4 @@
+/* Hide row labels in the react-spreadsheet component */
+.react-spreadsheet .Spreadsheet__row-label {
+    display: none;
+}
