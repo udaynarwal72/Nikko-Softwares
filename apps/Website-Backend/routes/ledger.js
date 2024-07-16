@@ -21,6 +21,8 @@ router.post('/createLedger', fetchUser, async (req, res) => {
       return res.status(404).json({ message: 'Master section not found' });
     }
     const item=await ItemList.findOne({masterId:master._id, userId: req.user.id,group:group})
+    console.log(item._id)
+    console.log(master._id)
 
     // Create new ledger
     const newLedger = new Ledger({
