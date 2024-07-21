@@ -34,8 +34,23 @@ router.post('/setitemlist', fetchUser, async (req, res) => {
 
 // Route to get items in the item list for the current user
 router.get('/getitemlist', fetchUser, async (req, res) => {
+  const { section } = req.body; // Get the sectionName from the query parameters
+
+  const master = await Master.findOne({ section, userId: req.user.id });
+  if (!master) {
+    return res.status(404).json({ message: 'Master section not found' });
+  }
+
+
+
   try {
-    const itemList = await ItemList.find({ userId: req.user.id }).populate('userId').populate('masterId');
+    // Find item list by user ID and section name
+    const query = { userId: req.user.id };
+    if (section) {
+      query.masterId = master._id;
+    }
+    
+    const itemList = await ItemList.find(query).populate('userId').populate('masterId');
     res.status(200).json(itemList);
   } catch (error) {
     res.status(400).json({ message: error.message });
