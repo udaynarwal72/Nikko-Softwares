@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg';
 import Navbar from './component/Navbar/Navbar';
 import Sidebar from './component/Sidebar/Sidebar';
 import API_URL from './helper/ApiKey';
-
+//tests
 function App() {
   const [count, setCount] = useState(0);
   console.log(API_URL)
