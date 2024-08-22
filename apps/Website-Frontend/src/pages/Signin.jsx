@@ -10,8 +10,8 @@ const LoginPage = () => {
         try {
             await axios.post('http://localhost:3200/api/auth', { id, password })
                 .then((res) => {
-                    console.log('User registered:', res.data);
                     localStorage.setItem('auth-token', res.data);
+                    window.location.href = '/dashboard';
                 });
 
         } catch (error) {
