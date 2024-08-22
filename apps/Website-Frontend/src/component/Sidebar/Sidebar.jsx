@@ -19,21 +19,21 @@ const Sidebar = () => {
             <div>
                 <ul className='sidebar-menu flex-grow mt-9'>
                     <li className="mt-5">
-                        <a href='#' className='flex items-center block text-black py-2 px-4 bg-sidebarhover rounded-lg hover:bg-gray-200'>
+                        <a href='/dashboard' className='flex items-center block text-black py-2 px-4 bg-sidebarhover rounded-lg hover:bg-gray-200'>
                             <i className='bx bx-grid-alt text-xl'></i>
                             <img src={dashboardIcon} alt='Dashboard' className='ml-2' width='24px' height='24px' />
                             <span className='ml-2'>Dashboard</span>
                         </a>
                     </li>
                     <li className="mt-5">
-                        <a href='#' className='flex items-center block text-black py-2 px-4 rounded-lg hover:bg-gray-200'>
+                        <a href='/master' className='flex items-center block text-black py-2 px-4 rounded-lg hover:bg-gray-200'>
                             <i className='bx bx-user text-xl'></i>
                             <img src={masterIcon} alt='Master' className='ml-2' width='24px' height='24px' />
                             <span className='ml-2'>Master</span>
                         </a>
                     </li>
                     <li className="mt-5">
-                        <a href='#' className='flex items-center block text-black py-2 px-4 rounded-lg hover:bg-gray-200'>
+                        <a href='/voucherentry' className='flex items-center block text-black py-2 px-4 rounded-lg hover:bg-gray-200'>
                             <i className='bx bx-chat text-xl'></i>
                             <img src={voucherEntry} alt='Voucher Entry' className='ml-2' width='24px' height='24px' />
                             <span className='ml-2'>Voucher Entry</span>

@@ -73,12 +73,14 @@ function CreateSection() {
                             </form>
                             <div className="flex flex-col gap-2">
                                 {userSection.map((section, index) => (
-                                    <div key={index} className="flex items-center justify-between p-2 border-b border-gray-200">
-                                        <span className="text-md font-medium">{section.section.toUpperCase()}</span>
-                                        <a>
-                                            <img src={binIcon} alt="bin icon" className="w-4 h-4" />
-                                        </a>
-                                    </div>
+                                    <a href={`/itemlist/${section.section}`}>
+                                        <div key={index} className="flex items-center justify-between p-2 border-b border-gray-200">
+                                            <span className="text-md font-medium">{section.section.toUpperCase()}</span>
+                                            <a>
+                                                <img src={binIcon} alt="bin icon" className="w-4 h-4" />
+                                            </a>
+                                        </div>
+                                    </a>
                                 ))}
                             </div>
                             {error && <p className="text-red-500 mt-4">{error}</p>}

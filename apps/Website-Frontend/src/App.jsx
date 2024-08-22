@@ -15,6 +15,9 @@ function App() {
           <div className="">
             <Sidebar />
           </div>
+          <div className='flex items-center w-full justify-center'>
+            Image here!!
+          </div>
         </div>
       </div>
     </>

@@ -18,10 +18,10 @@ import ItemTable from './pages/ItemTable.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />
+    element: <LoginPage />
   },
   {
-    path: '/tutionfeesvoucherentry',
+    path: '/voucherentry',
     element: <TutionFeesVoucherEntry />
   },
   {
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     element: <AddAccDetails />
   },
   {
-    path: '/createsection',
+    path: '/master',
     element: <CreateSection />
   },
   {
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
     element: <EditableTable />
   },
   {
-    path: '/itemlist',
+    path: '/itemlist/:sectionId',
     element:<ItemTable/>
   },
   {
@@ -49,8 +49,8 @@ const router = createBrowserRouter([
     element: <CashBook />
   },
   {
-    path:'/signin',
-    element:<LoginPage/>
+    path:'/dashboard',
+    element:<App/>
   }
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(

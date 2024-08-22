@@ -4,85 +4,83 @@ import Navbar from '../component/Navbar/Navbar';
 import Sidebar from '../component/Sidebar/Sidebar';
 import '../styles/ItemTable.css'; // Import the CSS file for custom styles
 import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ItemTable = () => {
-    const initialData = [
-        [{ value: '1' }, { value: 'GOV. Salary Grant' }, { value: 'Income' }],
-        [{ value: '2' }, { value: 'Gov. Salary Recovery' }, { value: 'Income' }],
-        [{ value: '3' }, { value: 'Medical Bill' }, { value: 'Income' }],
-        [{ value: '4' }, { value: 'Non Salary Grant' }, { value: 'Income' }],
-        [{ value: '5' }, { value: 'Bank Interest' }, { value: 'Income' }],
-        [{ value: '6' }, { value: 'E.B.C Grant' }, { value: 'Income' }],
-        [{ value: '7' }, { value: 'B.C Grant' }, { value: 'Income' }],
-        [{ value: '8' }, { value: 'Rastriy Harit Sena Grant' }, { value: 'Income' }],
-        [{ value: '9' }, { value: 'Admission Fee' }, { value: 'Income' }],
-    ];
-
+    const navigate = useNavigate();
+    const initialData = []; // Ensure this matches the format required by react-spreadsheet
+    const { sectionId } = useParams(); // Destructure sectionId from useParams
     const [tableData, setTableData] = useState(initialData);
     const [userTable, setUserTable] = useState([]);
     const columnLabels = ["AC/.NO", "Type of Practical Account", "Group"];
+    const [rowId, setRowId] = useState([]);
 
     const handleCancel = () => {
-        setTableData(initialData);
+        navigate('/master')
     };
 
     const handleAddRow = async () => {
         const newRow = [{ value: '' }, { value: '' }, { value: '' }];
         try {
-            const res = await axios.post('http://localhost:3200/api/itemlist/setitemlist', {
-                acc_no: '',
-                type_of_account: '',
-                group: ''
-            }, {
-                headers: {
-                    "auth-token": localStorage.getItem('auth-token')
-                }
-            });
-            const newRowWithId = [{ value: res.data.acc_no }, { value: res.data.type_of_account }, { value: res.data.group }];
+            const res = await axios.post(
+                'http://localhost:3200/api/itemlist/setitemlist',
+                { acc_no: ' ', type_of_account: ' ', group: '   ', section: sectionId },
+                { headers: { "auth-token": localStorage.getItem('auth-token') } }
+            );
+            const newRowWithId = [
+                { value: res.data.acc_no },
+                { value: res.data.type_of_account },
+                { value: res.data.group }
+            ];
             setTableData([...tableData, newRowWithId]);
+            getItemList();
         } catch (err) {
-            console.log('Error adding new row:', err);
+            console.error('Error adding new row:', err);
+        }
+    };
+
+    const getItemList = async () => {
+        try {
+            const res = await axios.get(
+                'http://localhost:3200/api/itemlist/getitemlist',
+                { headers: { "auth-token": localStorage.getItem('auth-token') } }
+            );
+            const formattedData = res.data.map(item => [
+                { value: item.acc_no },
+                { value: item.type_of_account },
+                { value: item.group }
+            ]);
+            setUserTable(formattedData);
+            const idArray = res.data.map(item => item._id);
+            setRowId(idArray);
+        } catch (err) {
+            console.error('Error fetching item list:', err);
         }
     };
 
     useEffect(() => {
-        const getItemList = async () => {
-            try {
-                const res = await axios.get('http://localhost:3200/api/itemlist/getitemlist', {
-                    headers: {
-                        "auth-token": localStorage.getItem('auth-token')
-                    }
-                });
-                const formattedData = res.data.map(item => [
-                    { value: item.acc_no },
-                    { value: item.type_of_account },
-                    { value: item.group }
-                ]);
-                setUserTable(formattedData);
-            } catch (err) {
-                console.log('Error fetching sections:', err);
-            }
-        }
         getItemList();
-    }, []);
+    }, [sectionId]); // Include sectionId in the dependency array
 
-    const handleSave = async () => {
+    const handleSave = async () => { 
         try {
-            for (let i = 0; i < tableData.length; i++) {
+            // Update each row
+            await Promise.all(tableData.map(async (row, index) => {
                 const updatedData = {
-                    acc_no: tableData[i][0].value,
-                    type_of_account: tableData[i][1].value,
-                    group: tableData[i][2].value
+                    acc_no: row[0].value,
+                    type_of_account: row[1].value,
+                    group: row[2].value,
+                    section: sectionId
                 };
-                await axios.put(`http://localhost:3200/api/itemlist/updateitemlist/${updatedData.acc_no}`, updatedData, {
-                    headers: {
-                        "auth-token": localStorage.getItem('auth-token')
-                    }
-                });
-            }
+                await axios.put(
+                    `http://localhost:3200/api/itemlist/updateitemlist/${rowId[index]}`,
+                    updatedData,
+                    { headers: { "auth-token": localStorage.getItem('auth-token') } }
+                );
+            }));
             console.log('All items updated successfully');
         } catch (err) {
-            console.log('Error updating items:', err);
+            console.error('Error updating items:', err);
         }
     };
 
@@ -125,6 +123,6 @@ const ItemTable = () => {
             </div>
         </div>
     );
-}
+};
 
 export default ItemTable;
